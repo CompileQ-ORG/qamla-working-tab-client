@@ -35,7 +35,7 @@ const AdminEye = () => {
     }
 
     return (
-        <div>
+        <div >
             <h2 className='text-center text-3xl mt-12'>All Managers, Employees and Admins</h2>
 
             <p className=''>Search </p>

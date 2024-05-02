@@ -9,7 +9,7 @@ const EmployeeRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading || isEmployeeLoading) {
-        return <h2>Loading!!!</h2>
+        return <span className="loading loading-spinner loading-lg"></span>
     }
 
     if (user && isEmployee) {

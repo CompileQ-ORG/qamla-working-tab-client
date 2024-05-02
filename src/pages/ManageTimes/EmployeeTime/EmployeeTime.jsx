@@ -12,24 +12,13 @@ import Swal from "sweetalert2";
 const EmployeeTime = () => {
     const { user } = useContext(AuthContext)
     const { register, reset, handleSubmit, watch, formState: { errors } } = useForm()
-
-    // const [timeValue, setTimeValue] = useState('')
-    // console.log('toLocaleString', (timeValue.$d));
-    // const starty = (timeValue.$d);
     const starty = new Date()
-
-    // const [storeStarty, setStoreStarty] = useState('')
 
 
     const onSubmitStart = (data) => {
-        // console.log(data)
-        // // setStoreStarty(data.)
-        // console.log(data.restaurantcode)
         const employeetimesrecrodstart = {
             restaurantcode: data.restaurantcode,
             starty,
-            // accept: false,
-            // deny: false,
             name: user.displayName,
             email: user.email,
         }
@@ -47,7 +36,6 @@ const EmployeeTime = () => {
                 localStorage.clear();
                 localStorage.setItem(`${user?.displayName}Id`, `${data.insertedId}`)
                 localStorage.setItem('starty', `${starty}`)
-
                 Swal.fire("Start time added succcessfully!");
             })
     }
@@ -56,9 +44,7 @@ const EmployeeTime = () => {
         <div>
             <form className="mt-10 mx-5 lg:mx-10 " onSubmit={handleSubmit(onSubmitStart)}>
 
-
                 <div className="form-control md:w-1/5">
-                    {/* w-1/5 */}
                     <label className="label">
                         <span className="label-text">Restaurant Name or Code</span>
                     </label>
@@ -66,28 +52,8 @@ const EmployeeTime = () => {
                     {errors.restaurantcode && <span className="text-red-600">This field is required</span>}
                 </div>
 
-                {/* start time picker */}
-                {/* <div className="mt-5 ">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer
-                            components={[
-                                'MobileTimePicker',
-                            ]}
-                        >
-
-                            <DemoItem label="Start Time">
-                                <MobileTimePicker
-                                    label='select time'
-                                    value={timeValue}
-                                    onChange={(newValue) => setTimeValue(newValue)}
-                                    defaultValue={dayjs('2022-04-17T15:30')} />
-                            </DemoItem>
-                        </DemoContainer>
-
-                    </LocalizationProvider>
-                </div> */}
-
                 <input className="mt-8 mb-20 btn btn-primary hover:bg-[#a9c2de] bg-[#009EFF] border-none text-white" type="submit" value="save start time" />
+
             </form>
         </div>
     );

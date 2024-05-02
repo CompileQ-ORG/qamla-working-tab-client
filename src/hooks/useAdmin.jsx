@@ -13,6 +13,7 @@ const useAdmin = email => {
                     setIsAdmin(data.isAdmin)
                     setIsAdminLoading(false)
                 })
+
         }
     }, [email])
     return [isAdmin, isAdminLoading]

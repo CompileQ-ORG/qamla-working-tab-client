@@ -1,24 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { twelveHourFormat } from "../../../utils/EmpTimeFunc";
+import { totalWorkHourFunc } from "../../../utils/TotalWorkHourFunc";
+import { plainTime } from "../../../utils/PlainTime";
 
 const EmployeeTotalTIme = () => {
     const { user } = useContext(AuthContext)
     const [allTime, setAllTime] = useState([])
-
-    const plainTime = function (x) {
-        const timestamp = x;
-        const date = new Date(timestamp);
-
-        const hours = date.getUTCHours();
-        const minutes = date.getUTCMinutes();
-
-        return (`Hours: ${hours}, Minutes: ${minutes}`);
-    }
-
-    const thatDay = function () {
-        const [datePart, timePart] = dateTimeString.split('T');
-        return datePart;
-    }
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_mainapi}/emptotaltime?email=${user?.email}`)
@@ -29,6 +17,10 @@ const EmployeeTotalTIme = () => {
             })
     }, [])
 
+
+
+
+
     return (
         <>
             <div className="overflow-x-auto mt-10 mb-20">
@@ -38,19 +30,24 @@ const EmployeeTotalTIme = () => {
                         <tr>
                             <th></th>
                             <th>Restaurant Name</th>
-                            <th>Hours</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Breaktime</th>
+                            <th>Total Hours</th>
                             <th>Date</th>
                         </tr>
                     </thead>
 
 
                     <tbody>
-                        {/* row 1 */}
                         {
                             allTime.map((emp, i) =>
                                 <tr key={emp._id}>
                                     <th>{i + 1}</th>
                                     <td>{emp.restaurantcode}</td>
+                                    <td>{twelveHourFormat(emp.starty)}</td>
+                                    <td>{twelveHourFormat(emp.endy)}</td>
+                                    <td>{emp.breakhour} hr {emp.breakminute} min</td>
                                     <td>{plainTime(emp.neattime)}</td>
                                     <td>{((emp.starty).split('T')[0])}</td>
                                 </tr>

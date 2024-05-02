@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { twelveHourFormat } from '../../../utils/EmpTimeFunc';
 
 const EmployeeSingleProfile = () => {
     const allworksOfAnEmployee = useLoaderData();
@@ -25,6 +26,9 @@ const EmployeeSingleProfile = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Restaurant Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Break Time</th>
                             <th>Hours</th>
                             <th>Date</th>
                         </tr>
@@ -38,6 +42,9 @@ const EmployeeSingleProfile = () => {
                                     <td>{emp.name}</td>
                                     <td>{emp.email}</td>
                                     <td>{emp.restaurantcode}</td>
+                                    <td>{twelveHourFormat(emp.starty)}</td>
+                                    <td>{twelveHourFormat(emp.endy)}</td>
+                                    <td>{plainTime(emp.totalBreakTime)}</td>
                                     <td>{plainTime(emp.neattime)}</td>
                                     <td>{((emp.starty).split('T')[0])}</td>
 

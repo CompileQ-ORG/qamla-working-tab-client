@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
+import { twelveHourFormat } from '../../../utils/EmpTimeFunc';
 
 const EmployeesTimeList = () => {
 
     const { user } = useContext(AuthContext)
     const [empTotalTime, setEmpTotalTime] = useState([]);
+
 
 
     const plainTime = function (x) {
@@ -64,7 +66,10 @@ const EmployeesTimeList = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Restaurant Name</th>
-                            <th>Hours</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Break Time</th>
+                            <th>Total Hours</th>
                             <th>Date</th>
                         </tr>
                     </thead>
@@ -77,9 +82,11 @@ const EmployeesTimeList = () => {
                                     <td>{emp.name}</td>
                                     <td>{emp.email}</td>
                                     <td>{emp.restaurantcode}</td>
+                                    <td>{twelveHourFormat(emp.starty)}</td>
+                                    <td>{twelveHourFormat(emp.endy)}</td>
+                                    <td>{plainTime(emp.totalBreakTime)}</td>
                                     <td>{plainTime(emp.neattime)}</td>
                                     <td>{((emp.starty).split('T')[0])}</td>
-
                                 </tr>
                             )
                         }
